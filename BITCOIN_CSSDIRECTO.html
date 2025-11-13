@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burbuja flotante</title>
+  <style>
+    body {
+
+  font-family: Arial, sans-serif;
+}
+
+/* diseño de la burbuja */
+.burbuja-flotante {
+  position: fixed;
+  bottom: 20px;   /* distancia desde la parte inferior */
+  right: 20px;    /* distancia desde el borde derecho */
+  width: 60px;
+  height: 60px;
+  background-color: #2545d3; 
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Efecto al tocar la burbuja */
+.burbuja-flotante:hover {
+  background-color: #1e83be;
+  transform: scale(1.1);
+}
+
+/* Animación de la "flotación" */
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.burbuja-flotante {
+  animation: flotar 2s infinite ease-in-out;
+}
+  </style>
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+  
+  <div class="burbuja-flotante">
+    <i class="fas fa-question"></i> 
+  </div>
+</body>
+</html>
