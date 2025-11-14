@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitWallet - Tu Wallet Bitcoin para Emprendedores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" defer>
+    <link rel="stylesheet" href="style.css" defer>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" defer>
+    <style>
+/* diseño de la burbuja */
+.burbuja-flotante {
+  position: fixed;
+  bottom: 20px;   /* distancia desde la parte inferior */
+  right: 20px;    /* distancia desde el borde derecho */
+  width: 60px;
+  height: 60px;
+  background-color: #F7931A; 
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Efecto al tocar la burbuja */
+.burbuja-flotante:hover {
+  background-color: #1e83be;
+  transform: scale(1.1);
+}
+
+/* Animación de la "flotación" */
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.burbuja-flotante {
+  animation: flotar 2s infinite ease-in-out;
+}
+        
+    </style>
+</head>
+<body>
+
+   " <div class="burbuja-flotante">
+    <i class="fas fa-question"></i> 
+  </div>
+    <!-- Bitcoin Loader -->
+    <div id="bitcoin-loader">
+        <div class="bitcoin-logo">
+            <i class="fab fa-bitcoin"></i>
+        </div>
+        <div class="loader-text">Cargando BitWallet</div>
+        <div class="loader-subtext">Tu plataforma para emprendedores</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fab fa-bitcoin"></i>
+                    <span>BitWallet</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#caracteristicas">Características</a></li>
+                    <li><a href="#como-funciona">Cómo Funciona</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" onclick="showLogin()">Iniciar Sesión</button>
+                    <button class="btn btn-primary" onclick="showRegister()">Registrarse</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="inicio">
+            <h1>Revoluciona tu Emprendimiento con BitWallet</h1>
+            <p>La plataforma todo en uno para gestionar tus finanzas y hacer crecer tu negocio con tecnología blockchain.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="showRegister()">Crear Cuenta Gratis</button>
+                <button class="btn btn-outline" onclick="showLogin()">Ver Demo</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">10,000+</div>
+                    <div class="stat-label">Emprendedores</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$5M+</div>
+                    <div class="stat-label">Transacciones</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">50+</div>
+                    <div class="stat-label">Países</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="auth-form-container">
+            <div class="auth-form">
+                <div class="form-header">
+                    <h2>Iniciar Sesión</h2>
+                    <button class="close-btn" onclick="hideAuthForms()">&times;</button>
+                </div>
+                <form id="loginFormElement" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña:</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" name="remember">
+                            <span>Recordar sesión</span>
+                        </label>
+                        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+                </form>
+                <div class="form-footer">
+                    <p>¿No tienes cuenta? <a href="#" onclick="showRegister()">Regístrate aquí</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="auth-form-container">
+            <div class="auth-form">
+                <div class="form-header">
+                    <h2>Registrarse</h2>
+                    <button class="close-btn" onclick="hideAuthForms()">&times;</button>
+                </div>
+                <form id="registerFormElement" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerName">Nombre Completo:</label>
+                        <input type="text" id="registerName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" id="registerEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña:</label>
+                        <input type="password" id="registerPassword" name="password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Confirmar Contraseña:</label>
+                        <input type="password" id="registerConfirmPassword" name="confirmPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerBusiness">Nombre del Emprendimiento:</label>
+                        <input type="text" id="registerBusiness" name="business" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" name="terms" required>
+                            <span>Acepto los <a href="#">términos y condiciones</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Crear Cuenta</button>
+                </form>
+                <div class="form-footer">
+                    <p>¿Ya tienes cuenta? <a href="#" onclick="showLogin()">Inicia sesión aquí</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="features" id="caracteristicas">
+            <div class="section-title">
+                <h2>Características Principales</h2>
+                <p>Descubre todo lo que nuestra plataforma puede hacer por tu negocio</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analíticas Avanzadas</h3>
+                    <p>Obtén insights detallados sobre tu negocio para tomar mejores decisiones.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Gestión de Pedidos</h3>
+                    <p>Controla y organiza todos tus pedidos desde una sola plataforma intuitiva.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Protección Avanzada</h3>
+                    <p>Tus datos y transacciones están protegidos con encriptación de nivel bancario.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Transacciones Rápidas</h3>
+                    <p>Realiza pagos y transferencias instantáneas sin demoras ni comisiones ocultas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Alcance Global</h3>
+                    <p>Conecta con clientes y proveedores de todo el mundo sin fronteras.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>App Móvil</h3>
+                    <p>Gestiona tu negocio desde cualquier lugar con nuestra aplicación móvil.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works" id="como-funciona">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Cómo Funciona</h2>
+                    <p>Comienza en solo 3 simples pasos</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Regístrate</h3>
+                        <p>Crea tu cuenta en menos de 2 minutos con tu email y datos básicos.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Configura tu Negocio</h3>
+                        <p>Personaliza tu perfil y configura los servicios que necesitas.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Comienza a Crecer</h3>
+                        <p>Gestiona pedidos, recibe pagos y haz crecer tu negocio.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials" id="testimonios">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Lo que Dicen Nuestros Emprendedores</h2>
+                    <p>Descubre cómo BitWallet está transformando negocios</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "BitWallet ha revolucionado mi negocio. Ahora gestiono todos mis pedidos y finanzas en un solo lugar de forma segura y eficiente."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MC</div>
+                            <div class="author-info">
+                                <h4>María Cortés</h4>
+                                <p>Dueña de Boutique Online</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "La seguridad de la plataforma es increíble. Me siento tranquilo sabiendo que mis datos están protegidos con tecnología de última generación."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JG</div>
+                            <div class="author-info">
+                                <h4>Javier Gómez</h4>
+                                <p>Fundador de TechStart</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Las analíticas me han ayudado a entender mejor a mis clientes y aumentar mis ventas en un 40% en solo tres meses."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AL</div>
+                            <div class="author-info">
+                                <h4>Ana López</h4>
+                                <p>Emprendedora de Moda</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Comienza Tu Viaje Hoy</h2>
+                    <p>Únete a miles de emprendedores que ya están transformando sus negocios con BitWallet. Regístrate gratis y descubre todo el potencial de tu emprendimiento.</p>
+                    <button class="btn btn-primary" onclick="showRegister()">Crear Cuenta Gratis</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BitWallet</h3>
+                    <p>La plataforma todo en uno para emprendedores que buscan gestionar sus finanzas y hacer crecer sus negocios.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#caracteristicas">Características</a></li>
+                        <li><a href="#como-funciona">Cómo Funciona</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:soporte@bitwallet.com">soporte@bitwallet.com</a></li>
+                        <li><a href="tel:+123456789">+1 (234) 567-89</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BitWallet. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

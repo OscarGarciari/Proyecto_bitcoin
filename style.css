@@ -1,0 +1,641 @@
+:root {
+    --bitcoin-orange: #F7931A;
+    --bitcoin-orange-dark: #E07B00;
+    --bitcoin-orange-light: #FFA94D;
+    --dark-bg: #0A0A0A;
+    --dark-card: #121212;
+    --dark-border: #1A1A1A;
+    --dark-text: #E0E0E0;
+    --dark-text-secondary: #9E9E9E;
+    --success: #27AE60;
+    --gradient: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--gradient);
+    color: var(--dark-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: pageEntrance 1.5s ease-in-out 3.5s forwards;
+}
+
+/* Animación de entrada de la página */
+@keyframes pageEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Bitcoin Loader con animación de entrada */
+#bitcoin-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: loaderExit 1s ease-in-out 3s forwards;
+}
+
+.bitcoin-logo {
+    width: 120px;
+    height: 120px;
+    background: var(--bitcoin-orange);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    animation: 
+        logoEntrance 1.5s ease-out,
+        pulse 2s infinite 1.5s;
+    box-shadow: 0 0 30px rgba(247, 147, 26, 0.5);
+    transform: scale(0);
+}
+
+.bitcoin-logo i {
+    font-size: 60px;
+    color: var(--dark-bg);
+    animation: iconRotate 2s ease-in-out 0.5s;
+}
+
+.loader-text {
+    font-size: 1.2rem;
+    color: var(--dark-text);
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: textSlideUp 1s ease-out 1s forwards;
+}
+
+.loader-subtext {
+    color: var(--bitcoin-orange);
+    font-size: 0.9rem;
+    opacity: 0;
+    animation: textSlideUp 1s ease-out 1.2s forwards;
+}
+
+.loading-bar {
+    width: 200px;
+    height: 4px;
+    background: var(--dark-border);
+    border-radius: 2px;
+    margin-top: 20px;
+    overflow: hidden;
+    opacity: 0;
+    animation: textSlideUp 1s ease-out 1.4s forwards;
+}
+
+.loading-progress {
+    height: 100%;
+    width: 0%;
+    background: var(--bitcoin-orange);
+    border-radius: 2px;
+    animation: loadingProgress 2.5s ease-in-out 1.5s forwards;
+}
+
+/* Animaciones del loader */
+@keyframes logoEntrance {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1) rotate(10deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes iconRotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes textSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loadingProgress {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 60%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes pulse {
+    0% { 
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(247, 147, 26, 0.5);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 50px rgba(247, 147, 26, 0.8);
+    }
+    100% { 
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(247, 147, 26, 0.5);
+    }
+}
+
+@keyframes loaderExit {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.1);
+        display: none;
+    }
+}
+
+/* Animaciones de entrada para el contenido */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--dark-border);
+    transform: translateY(-100%);
+    animation: slideDown 1s ease-out 3.5s forwards;
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-text);
+    opacity: 0;
+    animation: fadeIn 1s ease-out 4s forwards;
+}
+
+.logo i {
+    color: var(--bitcoin-orange);
+    animation: bitcoinGlow 3s ease-in-out infinite 4s;
+}
+
+@keyframes bitcoinGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(247, 147, 26, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(247, 147, 26, 0.8));
+    }
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links li {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.nav-links li:nth-child(1) { animation: navItemEntrance 0.6s ease-out 4.1s forwards; }
+.nav-links li:nth-child(2) { animation: navItemEntrance 0.6s ease-out 4.2s forwards; }
+.nav-links li:nth-child(3) { animation: navItemEntrance 0.6s ease-out 4.3s forwards; }
+.nav-links li:nth-child(4) { animation: navItemEntrance 0.6s ease-out 4.4s forwards; }
+
+@keyframes navItemEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-links a {
+    color: var(--dark-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--bitcoin-orange);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--bitcoin-orange);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 4.5s forwards;
+}
+
+.btn {
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--bitcoin-orange);
+    color: var(--bitcoin-orange);
+}
+
+.btn-primary {
+    background: var(--bitcoin-orange);
+    color: var(--dark-bg);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(247, 147, 26, 0.3);
+}
+
+/* Hero Section con animaciones */
+.hero {
+    padding: 180px 0 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(247, 147, 26, 0.1) 0%, transparent 70%);
+    z-index: -1;
+    animation: backgroundPulse 4s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.05);
+    }
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, var(--dark-text), var(--bitcoin-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroTextEntrance 1.2s ease-out 4s forwards;
+}
+
+@keyframes heroTextEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: var(--dark-text-secondary);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroTextEntrance 1.2s ease-out 4.2s forwards;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 4.4s forwards;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: space-around;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--dark-card);
+    border-radius: 10px;
+    border: 1px solid var(--dark-border);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: statsEntrance 1s ease-out 4.6s forwards;
+}
+
+@keyframes statsEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-item {
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.stat-item:nth-child(1) { animation: statPop 0.6s ease-out 4.8s forwards; }
+.stat-item:nth-child(2) { animation: statPop 0.6s ease-out 5s forwards; }
+.stat-item:nth-child(3) { animation: statPop 0.6s ease-out 5.2s forwards; }
+
+@keyframes statPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    70% {
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--bitcoin-orange);
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    color: var(--dark-text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Features Section con animaciones escalonadas */
+.features {
+    padding: 100px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 5.4s forwards;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--dark-text);
+}
+
+.section-title p {
+    color: var(--dark-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: var(--dark-card);
+    padding: 40px 30px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-border);
+    transition: all 0.3s;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.feature-card:nth-child(1) { animation: cardEntrance 0.8s ease-out 5.6s forwards; }
+.feature-card:nth-child(2) { animation: cardEntrance 0.8s ease-out 5.8s forwards; }
+.feature-card:nth-child(3) { animation: cardEntrance 0.8s ease-out 6s forwards; }
+.feature-card:nth-child(4) { animation: cardEntrance 0.8s ease-out 6.2s forwards; }
+.feature-card:nth-child(5) { animation: cardEntrance 0.8s ease-out 6.4s forwards; }
+.feature-card:nth-child(6) { animation: cardEntrance 0.8s ease-out 6.6s forwards; }
+
+@keyframes cardEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--bitcoin-orange);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: var(--bitcoin-orange);
+    margin-bottom: 20px;
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: var(--dark-text-secondary);
+}
+
+/* Animación de fadeIn general */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* ============================== */
+/* TEMP: Mostrar inmediatamente - pruebas */
+/* Quitar o revertir esto cuando termines de testear */
+body {
+    opacity: 1 !important;
+    animation: none !important;
+}
+#bitcoin-loader {
+    display: none !important;
+}
+.burbuja-flotante {
+    z-index: 10001 !important;
+}
+/* ============================== */
